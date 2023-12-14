@@ -13,16 +13,28 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.EffectorCommands;
+import frc.robot.commands.HookCommands;
+import frc.robot.commands.IntakeCommands;
+import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Effector;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hook;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import java.util.List;
 
 /*
@@ -34,9 +46,17 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  public static final Shooter m_shooter = new Shooter();
+  public static final Hook m_hook = new Hook();
+  public static final Intake intake = new Intake();
+  public static final Effector m_effector = new Effector();
+
 
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
+ // XboxController m_operatorController = new XboxController(OIConstants.kOperatorControllerPort);
+
+private static Joystick controller2 = new Joystick(OIConstants.kOperatorControllerPort);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -68,10 +88,68 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotDrive.setX(),
-            m_robotDrive));
+
+    Trigger shooterForward = new Trigger(() -> controller2.getRawAxis(3) > 0.4);
+    shooterForward.whileTrue(ShooterCommands.shooterForward());
+    shooterForward.onFalse(ShooterCommands.shooterStop());
+
+    
+    Trigger shooterReverse = new Trigger(() -> controller2.getRawAxis(2) > 0.4);
+    shooterReverse.whileTrue(ShooterCommands.shooterReverse());
+    shooterReverse.onFalse(ShooterCommands.shooterStop());
+ 
+    
+    JoystickButton effectorForward = new JoystickButton(controller2, Constants.RBBUTTON);
+    effectorForward.whileTrue(EffectorCommands.effectorForward());
+    // effectorForward.onFalse(EffectorCommands.effectorStop());
+
+    
+    JoystickButton effectorReverse = new JoystickButton(controller2, Constants.LBBUTTON);
+    effectorReverse.whileTrue(EffectorCommands.effectorReverse());
+    // effectorReverse.onFalse(EffectorCommands.effectorStop());
+    
+
+      
+JoystickButton hookUp = new JoystickButton(controller2, Constants.BBUTTON);
+hookUp.whileTrue(HookCommands.moveUp());
+hookUp.onFalse(HookCommands.stopHook());
+
+
+JoystickButton hookDown = new JoystickButton(controller2, Constants.XBUTTON);
+hookDown.whileTrue(HookCommands.moveDown());
+hookDown.onFalse(HookCommands.stopHook());
+
+JoystickButton intakeUp = new JoystickButton(controller2, Constants.YBUTTON);
+intakeUp.whileTrue(IntakeCommands.intake(0.6));
+intakeUp.onFalse(IntakeCommands.stopIntake());
+
+
+JoystickButton intakeDown = new JoystickButton(controller2, Constants.ABUTTON);
+intakeDown.whileTrue(IntakeCommands.intake(-0.6));
+intakeDown.onFalse(IntakeCommands.stopIntake());
+
+
+
+   // effectorForward.whileFalse(EffectorCommands.effectorStop());
+    // if (m_operatorController.getRightBumperPressed()){
+    //     EffectorCommands.effectorForward();
+    // }
+    // if (m_operatorController.getLeftBumperPressed()){
+    //     EffectorCommands.effectorReverse();
+    // }
+    // if (m_operatorController.getBButtonPressed()){
+    //     HookCommands.moveUp();
+    // }
+    // if (m_operatorController.getXButtonPressed()){
+    //     HookCommands.moveDown();
+    // }
+    // if (m_operatorController.getRightTriggerAxis() > 0.1){
+    //     ShooterCommands.shooterForward();
+    // }
+    // if (m_operatorController.getLeftTriggerAxis() > 0.1){
+    //     ShooterCommands.shooterReverse();
+    // }
+    //IntakeCommands.intake(m_operatorController.getRightY());
   }
 
   /**
@@ -117,6 +195,6 @@ public class RobotContainer {
     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false, false));
+    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true, false));
   }
 }

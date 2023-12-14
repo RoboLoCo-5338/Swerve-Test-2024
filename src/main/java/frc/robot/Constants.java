@@ -24,6 +24,17 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+  public static final int ABUTTON = 1;
+  public static final int BBUTTON = 2;
+  public static final int XBUTTON = 3;
+  public static final int YBUTTON = 4;
+  public static final int LBBUTTON = 5;
+  public static final int RBBUTTON = 6;
+  public static final int BACKBUTTON = 7;
+  public static final int STARTBUTTON = 8;
+  public static final int LEFTSTICKBUTTON = 9;
+  public static final int RIGHTSTICKBUTTON = 10;
+
   public static final class DriveConstants {
     // Driving Parameters - Note that these are not the maximum capable speeds of
     // the robot, rather the allowed maximum speeds
@@ -61,6 +72,11 @@ public final class Constants {
     public static final int kRearLeftTurningCanId = 3;
     public static final int kFrontRightTurningCanId = 7;
     public static final int kRearRightTurningCanId = 1;
+
+    public static final int kEffectorCanId = 9;
+    public static final int kArmCanId = 10;
+    public static final int kFlywheelCanId = 11;
+    public static final int kBunnyArmCanId = 12;
 
     public static final boolean kGyroReversed = false;
   }
@@ -118,18 +134,21 @@ public final class Constants {
 
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
     public static final double kDriveDeadband = 0.10;
   }
 
   public static final class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = 0.2;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
-    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI/2;
+    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
 
     public static final double kPXController = 1;
     public static final double kPYController = 1;
     public static final double kPThetaController = 1;
+
+
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = new TrapezoidProfile.Constraints(
@@ -139,4 +158,8 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
   }
+
+  public static final int HOOK_MOTOR = 9; // placeholder
+  public static final int EFFECTOR_MOTOR = 10;
+  public static final int INTAKE_MOTOR = 11;
 }
