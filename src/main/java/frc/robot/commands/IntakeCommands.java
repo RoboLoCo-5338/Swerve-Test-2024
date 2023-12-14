@@ -14,9 +14,9 @@ public class IntakeCommands {
 
     }
 
-    public static Command stopIntake(double speed) {
+    public static Command stopIntake() {
         return new InstantCommand(
-            () -> RobotContainer.intake.moveIntake(speed),
+            () -> RobotContainer.intake.moveIntake(0),
             RobotContainer.intake
             );
 

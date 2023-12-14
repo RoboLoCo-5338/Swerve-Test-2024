@@ -101,12 +101,12 @@ private static Joystick controller2 = new Joystick(OIConstants.kOperatorControll
     
     JoystickButton effectorForward = new JoystickButton(controller2, Constants.RBBUTTON);
     effectorForward.whileTrue(EffectorCommands.effectorForward());
-    // effectorForward.onFalse(EffectorCommands.effectorStop());
+    effectorForward.onFalse(EffectorCommands.effectorStop());
 
     
     JoystickButton effectorReverse = new JoystickButton(controller2, Constants.LBBUTTON);
     effectorReverse.whileTrue(EffectorCommands.effectorReverse());
-    // effectorReverse.onFalse(EffectorCommands.effectorStop());
+    effectorReverse.onFalse(EffectorCommands.effectorStop());
     
 
       
