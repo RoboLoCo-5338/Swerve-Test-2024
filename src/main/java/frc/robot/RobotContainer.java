@@ -119,13 +119,13 @@ JoystickButton hookDown = new JoystickButton(controller2, Constants.XBUTTON);
 hookDown.whileTrue(HookCommands.moveDown());
 hookDown.onFalse(HookCommands.stopHook());
 
-JoystickButton intakeUp = new JoystickButton(controller2, Constants.YBUTTON);
-intakeUp.whileTrue(IntakeCommands.intake(0.6));
+JoystickButton intakeUp = new JoystickButton(controller2, Constants.ABUTTON);
+intakeUp.whileTrue(IntakeCommands.intake(0.1));
 intakeUp.onFalse(IntakeCommands.stopIntake());
 
 
-JoystickButton intakeDown = new JoystickButton(controller2, Constants.ABUTTON);
-intakeDown.whileTrue(IntakeCommands.intake(-0.6));
+JoystickButton intakeDown = new JoystickButton(controller2, Constants.YBUTTON);
+intakeDown.whileTrue(IntakeCommands.intake(-0.1));
 intakeDown.onFalse(IntakeCommands.stopIntake());
 
 

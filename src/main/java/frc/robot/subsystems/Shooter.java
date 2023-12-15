@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase {
 
     public void shooterForward() {//shoot
         //SmartDashboard.putString("PLEASE", "WORK");
-        shootMotor.set(0.3);
+        shootMotor.set(0.9 );
         
     }
 

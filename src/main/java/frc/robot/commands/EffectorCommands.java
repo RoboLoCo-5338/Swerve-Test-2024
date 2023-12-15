@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import frc.robot.RobotContainer;
 
 public class EffectorCommands {
-  public static long startingTime;
+//  public static long startingTime;
   
     public static Command effectorReverse() {
       return new InstantCommand(
@@ -39,21 +39,21 @@ public class EffectorCommands {
     //   );
     // }
 
-    public static Command timeEffectorForward(double time) {
-      return new FunctionalCommand(
-        () -> {startingTime = System.currentTimeMillis();},
-        () -> RobotContainer.m_effector.effectorForward(),
-        (interrupt) -> RobotContainer.m_effector.effectorStop(),
-        () -> System.currentTimeMillis() - startingTime > time 
-      );
-    }
+  //   public static Command timeEffectorForward(double time) {
+  //     return new FunctionalCommand(
+  //       () -> {startingTime = System.currentTimeMillis();},
+  //       () -> RobotContainer.m_effector.effectorForward(),
+  //       (interrupt) -> RobotContainer.m_effector.effectorStop(),
+  //       () -> System.currentTimeMillis() - startingTime > time 
+  //     );
+  //   }
 
-    public static Command timeEffectorReverse(double time) {
-      return new FunctionalCommand(
-        () -> {startingTime = System.currentTimeMillis();},
-        () -> RobotContainer.m_effector.effectorReverse(),
-        (interrupt) -> RobotContainer.m_effector.effectorStop(),
-        () -> System.currentTimeMillis() - startingTime > time 
-      );
-  }
+  //   public static Command timeEffectorReverse(double time) {
+  //     return new FunctionalCommand(
+  //       () -> {startingTime = System.currentTimeMillis();},
+  //       () -> RobotContainer.m_effector.effectorReverse(),
+  //       (interrupt) -> RobotContainer.m_effector.effectorStop(),
+  //       () -> System.currentTimeMillis() - startingTime > time 
+  //     );
+  // }
 }

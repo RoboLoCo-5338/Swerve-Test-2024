@@ -73,6 +73,7 @@ public final class Constants {
     public static final int kFrontRightTurningCanId = 7;
     public static final int kRearRightTurningCanId = 1;
 
+    // CHANGE CAN IDS effector and flywheel
     public static final int kEffectorCanId = 9;
     public static final int kArmCanId = 10;
     public static final int kFlywheelCanId = 11;
@@ -159,7 +160,7 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 5676;
   }
 
-  public static final int HOOK_MOTOR = 9; // placeholder
-  public static final int EFFECTOR_MOTOR = 10;
-  public static final int INTAKE_MOTOR = 11;
+   //public static final int HOOK_MOTOR = 9; // placeholder
+  // public static final int EFFECTOR_MOTOR = 10;
+  // public static final int INTAKE_MOTOR = 11;
 }
