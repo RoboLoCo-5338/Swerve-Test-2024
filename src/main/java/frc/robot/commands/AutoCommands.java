@@ -10,11 +10,25 @@ import frc.robot.RobotContainer;
 public class AutoCommands {
     public static Command driveDistanceCommand(double distance, Direction direction){
     return new FunctionalCommand(
-      () -> RobotContainer.drivetrain.resetPosition(),
-      () -> RobotContainer.drivetrain.driveDistance(distance, direction),
-      (interrupt) -> RobotContainer.drivetrain.tankDrive(0, 0),
-      () -> Math.abs(RobotContainer.drivetrain.getPosition()) >= Math.abs(RobotContainer.drivetrain.targetPosition) - 0.1,
-      RobotContainer.drivetrain
+        //Add code
     );
+    }
+    public static Command leftRed(){
+      //Add code
+    }
+    public static Command midRed(){
+      //Add code
+    }
+    public static Command rightRed(){
+      //Add code
+    }
+    public static Command leftBlue(){
+      //Add code
+    }
+    public static Command midBlue(){
+      //Add code
+    }
+    public static Command rightBlue(){
+      //Add code
     }
 }
