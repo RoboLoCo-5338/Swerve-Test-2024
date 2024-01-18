@@ -8,27 +8,29 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 public class AutoCommands {
-    public static Command driveDistanceCommand(double distance, Direction direction){
-    return new FunctionalCommand(
-        //Add code
-    );
-    }
+  
     public static Command leftRed(){
+      return null;
       //Add code
     }
     public static Command midRed(){
+      return null;
       //Add code
     }
     public static Command rightRed(){
+      return null;
       //Add code
     }
     public static Command leftBlue(){
+      return null;
       //Add code
     }
     public static Command midBlue(){
+      return null;
       //Add code
     }
     public static Command rightBlue(){
+      return null;
       //Add code
     }
 }
