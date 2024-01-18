@@ -65,7 +65,7 @@ private static Joystick controller2 = new Joystick(OIConstants.kOperatorControll
     // Configure the button bindings
     configureButtonBindings();
 
-    // Configure default commands
+    // Configure defmmands
     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
@@ -118,14 +118,14 @@ hookUp.onFalse(HookCommands.stopHook());
 JoystickButton hookDown = new JoystickButton(controller2, Constants.XBUTTON);
 hookDown.whileTrue(HookCommands.moveDown());
 hookDown.onFalse(HookCommands.stopHook());
-
-JoystickButton intakeUp = new JoystickButton(controller2, Constants.ABUTTON);
-intakeUp.whileTrue(IntakeCommands.intake(0.1));
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Trigger intakeUp = new Trigger(() -> controller2.getRawAxis(1) > 0.4);
+intakeUp.whileTrue(IntakeCommands.intake(0.3));
 intakeUp.onFalse(IntakeCommands.stopIntake());
 
 
-JoystickButton intakeDown = new JoystickButton(controller2, Constants.YBUTTON);
-intakeDown.whileTrue(IntakeCommands.intake(-0.1));
+Trigger intakeDown = new Trigger(() -> controller2.getRawAxis(1) < -0.4);
+intakeDown.whileTrue(IntakeCommands.intake(-0.3));
 intakeDown.onFalse(IntakeCommands.stopIntake());
 
 
@@ -157,44 +157,56 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // Create config for trajectory
-    TrajectoryConfig config = new TrajectoryConfig(
-        AutoConstants.kMaxSpeedMetersPerSecond,
-        AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-        // Add kinematics to ensure max speed is actually obeyed
-        .setKinematics(DriveConstants.kDriveKinematics);
+ //public Command getAutonomousCommand() {
+//   //   // Create config for trajectory
+//     TrajectoryConfig config = new TrajectoryConfig(
+//         AutoConstants.kMaxSpeedMetersPerSecond,
+//         AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+//         // Add kinematics to ensure max speed is actually obeyed
+//         .setKinematics(DriveConstants.kDriveKinematics);
 
-    // An example trajectory to follow. All units in meters.
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-        // Start at the origin facing the +X direction
-        new Pose2d(0, 0, new Rotation2d(0)),
-        // Pass through these two interior waypoints, making an 's' curve path
-        List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
-        config);
+//   // //  // An example trajectory to follow. All units in meters.
+//     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+//      //   Start at the origin facing the +X direction
+//        new Pose2d(0, 0, new Rotation2d(0)),
+//        // Pass through these two interior waypoints, making an 's' curve path
+//         List.of(new Translation2d(1, 0), new Translation2d(2,  0)),
+//         // End 3 meters straight ahead of where we started, facing forward
+//         new Pose2d(2
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//         , 0, new Rotation2d(0)),
+//         config);
 
-    var thetaController = new ProfiledPIDController(
-        AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+//     var thetaController = new ProfiledPIDController(
+//         AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+//     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-        exampleTrajectory,
-        m_robotDrive::getPose, // Functional interface to feed supplier
-        DriveConstants.kDriveKinematics,
+//     SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+//         exampleTrajectory,
+//         m_robotDrive::getPose, // Functional interface to feed supplier
+//         DriveConstants.kDriveKinematics,
 
-        // Position controllers
-        new PIDController(AutoConstants.kPXController, 0, 0),
-        new PIDController(AutoConstants.kPYController, 0, 0),
-        thetaController,
-        m_robotDrive::setModuleStates,
-        m_robotDrive);
+//   //       // Position controllers
+//         new PIDController(AutoConstants.kPXController, 0, 0),
+//         new PIDController(AutoConstants.kPYController, 0, 0),
+//         thetaController,
+//         m_robotDrive::setModuleStates,
+//         m_robotDrive);
 
-    // Reset odometry to the starting pose of the trajectory.
-    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
+//   //   // // Reset odometry to the starting pose of the trajectory.
+//     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
-    // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true, false));
-  }
+//   // //   // // Run path following command, then stop at the end.
+//       return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true, false));
+//   //return null;
+// }
 }
