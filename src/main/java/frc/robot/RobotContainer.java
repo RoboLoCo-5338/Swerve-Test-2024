@@ -240,7 +240,9 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
             speeds.vyMetersPerSecond,
             speeds.omegaRadiansPerSecond,
             false, true),
-        true, // Whether or not to mirror the path based on alliance (this assumes the path is created for the blue alliance)
+        () -> {
+            return false;
+          }, // Whether or not to mirror the path based on alliance (CAN ADD LOGIC TO DO THIS AUTOMATICALLY)
         m_robotDrive // The subsystem(s) to require, typically your drive subsystem only
     );
 
