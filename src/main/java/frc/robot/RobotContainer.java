@@ -30,6 +30,7 @@ import frc.robot.subsystems.Effector;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hook;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Arm;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -56,6 +57,7 @@ public class RobotContainer {
   public static final Hook m_hook = new Hook();
   public static final Intake intake = new Intake();
   public static final Effector m_effector = new Effector();
+  public static final Arm m_arm= new Arm();
 
 
   // The driver's controller
