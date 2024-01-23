@@ -51,7 +51,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
  */
 public class RobotContainer {
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private static final DriveSubsystem m_robotDrive = new DriveSubsystem();
   public static final Shooter m_shooter = new Shooter();
   public static final Hook m_hook = new Hook();
   public static final Intake intake = new Intake();
@@ -280,5 +280,8 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
 
   public void periodic() { //FOR CHOREO 1/18/24
     m_field.setRobotPose(m_robotDrive.getPose());
+  }
+  public static DriveSubsystem getDriveSystem(){
+    return m_robotDrive;
   }
 }
