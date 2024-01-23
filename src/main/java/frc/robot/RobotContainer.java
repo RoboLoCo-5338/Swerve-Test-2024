@@ -25,7 +25,9 @@ import frc.robot.commands.EffectorCommands;
 import frc.robot.commands.HookCommands;
 import frc.robot.commands.IntakeCommands;
 import frc.robot.commands.ShooterCommands;
+import frc.robot.commands.AutoCommands;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.Effector;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Hook;
@@ -218,64 +220,64 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
 
     //1/18/24 ---- CHOREO TESTING
 
-    var thetaController = new PIDController(AutoConstants.kPThetaController, 0, 0);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+  //   var thetaController = new PIDController(AutoConstants.kPThetaController, 0, 0);
+  //   thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    m_robotDrive.resetOdometry(traj.getInitialPose());
+  //   m_robotDrive.resetOdometry(traj.getInitialPose());
 
-    Command swerveCommand = Choreo.choreoSwerveCommand(
-        traj, // Choreo trajectory from above
-        m_robotDrive::getPose, // A function that returns the current field-relative pose of the robot: your
-                               // wheel or vision odometry
-        new PIDController(Constants.AutoConstants.kPXController, 0.0, 0.0), // PIDController for field-relative X
-                                                                                   // translation (input: X error in meters,
-                                                                                   // output: m/s).
-        new PIDController(Constants.AutoConstants.kPYController, 0.0, 0.0), // PIDController for field-relative Y
-                                                                                   // translation (input: Y error in meters,
-                                                                                   // output: m/s).
-        thetaController, // PID constants to correct for rotation
-                         // error
-        (ChassisSpeeds speeds) -> m_robotDrive.drive( // needs to be robot-relative
-            speeds.vxMetersPerSecond,
-            speeds.vyMetersPerSecond,
-            speeds.omegaRadiansPerSecond,
-            false, true),
-        () -> {
-            return false;
-          }, // Whether or not to mirror the path based on alliance (CAN ADD LOGIC TO DO THIS AUTOMATICALLY)
-        m_robotDrive // The subsystem(s) to require, typically your drive subsystem only
-    );
+  //   Command swerveCommand = Choreo.choreoSwerveCommand(
+  //       traj, // Choreo trajectory from above
+  //       m_robotDrive::getPose, // A function that returns the current field-relative pose of the robot: your
+  //                              // wheel or vision odometry
+  //       new PIDController(Constants.AutoConstants.kPXController, 0.0, 0.0), // PIDController for field-relative X
+  //                                                                                  // translation (input: X error in meters,
+  //                                                                                  // output: m/s).
+  //       new PIDController(Constants.AutoConstants.kPYController, 0.0, 0.0), // PIDController for field-relative Y
+  //                                                                                  // translation (input: Y error in meters,
+  //                                                                                  // output: m/s).
+  //       thetaController, // PID constants to correct for rotation
+  //                        // error
+  //       (ChassisSpeeds speeds) -> m_robotDrive.drive( // needs to be robot-relative
+  //           speeds.vxMetersPerSecond,
+  //           speeds.vyMetersPerSecond,
+  //           speeds.omegaRadiansPerSecond,
+  //           false, true),
+  //       () -> {
+  //           return false;
+  //         }, // Whether or not to mirror the path based on alliance (CAN ADD LOGIC TO DO THIS AUTOMATICALLY)
+  //       m_robotDrive // The subsystem(s) to require, typically your drive subsystem only
+  //   );
 
-    return Commands.sequence(
-      Commands.runOnce(() -> m_robotDrive.resetOdometry(traj.getInitialPose())),
-      swerveCommand,
-      m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, false, true))
-  );
-  // DriverStation.Alliance ally = DriverStation.getAlliance();
-  //   if (ally == DriverStation.Alliance.Red) {
-  //     switch (AutoConstants.autoNum){
-  //       case 1:
-  //         return AutoCommands.leftRed();
-  //       case 2:
-  //         return AutoCommands.midRed();
-  //       case 3:
-  //         return AutoCommands.rightRed();
-  //     }
-  //   }
-  //   else if (ally == DriverStation.Alliance.Blue) {
-  //     switch (AutoConstants.autoNum){
-  //       case 1:
-  //         return AutoCommands.leftBlue();
-  //       case 2:
-  //         return AutoCommands.midBlue();
-  //       case 3:
-  //         return AutoCommands.rightBlue();
-  //     }
-  //   }
-  //   else {
-  //       return null;
-  //   }
-  //   return null;
+  //   return Commands.sequence(
+  //     Commands.runOnce(() -> m_robotDrive.resetOdometry(traj.getInitialPose())),
+  //     swerveCommand,
+  //     m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, false, true))
+  // );
+  DriverStation.Alliance ally = DriverStation.getAlliance();
+    if (ally == DriverStation.Alliance.Red) {
+      switch (AutoConstants.autoNum){
+        case 1:
+          return AutoCommands.leftRed();
+        case 2:
+          return AutoCommands.midRed();
+        case 3:
+          return AutoCommands.rightRed();
+      }
+    }
+    else if (ally == DriverStation.Alliance.Blue) {
+      switch (AutoConstants.autoNum){
+        case 1:
+          return AutoCommands.leftBlue();
+        case 2:
+          return AutoCommands.midBlue();
+        case 3:
+          return AutoCommands.rightBlue();
+      }
+    }
+    else {
+        return null;
+    }
+    return null;
   }
 
   public void periodic() { //FOR CHOREO 1/18/24
