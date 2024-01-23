@@ -28,6 +28,7 @@ import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Effector;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.NewShooter;
 import frc.robot.subsystems.Hook;
 import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -53,6 +54,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   public static final Shooter m_shooter = new Shooter();
+  public static final NewShooter m_shooterSubsystem = new NewShooter();
   public static final Hook m_hook = new Hook();
   public static final Intake intake = new Intake();
   public static final Effector m_effector = new Effector();
