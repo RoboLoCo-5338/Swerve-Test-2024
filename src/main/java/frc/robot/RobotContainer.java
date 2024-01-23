@@ -251,6 +251,31 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
       swerveCommand,
       m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, false, true))
   );
+  // DriverStation.Alliance ally = DriverStation.getAlliance();
+  //   if (ally == DriverStation.Alliance.Red) {
+  //     switch (AutoConstants.autoNum){
+  //       case 1:
+  //         return AutoCommands.leftRed();
+  //       case 2:
+  //         return AutoCommands.midRed();
+  //       case 3:
+  //         return AutoCommands.rightRed();
+  //     }
+  //   }
+  //   else if (ally == DriverStation.Alliance.Blue) {
+  //     switch (AutoConstants.autoNum){
+  //       case 1:
+  //         return AutoCommands.leftBlue();
+  //       case 2:
+  //         return AutoCommands.midBlue();
+  //       case 3:
+  //         return AutoCommands.rightBlue();
+  //     }
+  //   }
+  //   else {
+  //       return null;
+  //   }
+  //   return null;
   }
 
   public void periodic() { //FOR CHOREO 1/18/24
