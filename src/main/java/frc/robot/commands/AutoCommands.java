@@ -27,7 +27,26 @@ public class AutoCommands {
       //Add code
     }
     public static Command midRed(){
-      traj = Choreo.getTrajectory("Trajectory"); //1/18/24
+      return runTrajectory("NewPath");
+    }
+    public static Command rightRed(){
+      return null;
+      //Add code
+    }
+    public static Command leftBlue(){
+      return null;
+      //Add code
+    }
+    public static Command midBlue(){
+      return null;
+      //Add code
+    }
+    public static Command rightBlue(){
+      return null;
+      //Add code
+    }
+    public static Command runTrajectory(String name){
+      traj = Choreo.getTrajectory(name); //1/18/24
 
       m_field.getObject("traj").setPoses(
       traj.getInitialPose(), traj.getFinalPose()
@@ -68,21 +87,5 @@ public class AutoCommands {
       swerveCommand,
       m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, false, true))
      );
-    }
-    public static Command rightRed(){
-      return null;
-      //Add code
-    }
-    public static Command leftBlue(){
-      return null;
-      //Add code
-    }
-    public static Command midBlue(){
-      return null;
-      //Add code
-    }
-    public static Command rightBlue(){
-      return null;
-      //Add code
     }
 }
