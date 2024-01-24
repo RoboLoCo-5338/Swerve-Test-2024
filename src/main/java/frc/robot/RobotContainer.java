@@ -26,6 +26,7 @@ import frc.robot.commands.HookCommands;
 import frc.robot.commands.IntakeCommands;
 import frc.robot.commands.ShooterCommands;
 import frc.robot.commands.AutoCommands;
+import frc.robot.subsystems.Auto;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.Effector;
@@ -73,17 +74,17 @@ Field2d m_field = new Field2d();
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
+    // // Configure the button bindings
+    // configureButtonBindings();
 
-    traj = Choreo.getTrajectory("Trajectory"); //1/18/24
+    // traj = Choreo.getTrajectory("Trajectory"); //1/18/24
 
-    m_field.getObject("traj").setPoses(
-      traj.getInitialPose(), traj.getFinalPose()
-    );
-    m_field.getObject("trajPoses").setPoses(
-      traj.getPoses()
-    );
+    // m_field.getObject("traj").setPoses(
+    //   traj.getInitialPose(), traj.getFinalPose()
+    // );
+    // m_field.getObject("trajPoses").setPoses(
+    //   traj.getPoses()
+    // );
     // SmartDashboard.putData(m_field);
 
     // Configure default commands
@@ -253,31 +254,7 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
   //     swerveCommand,
   //     m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, false, true))
   // );
-  DriverStation.Alliance ally = DriverStation.getAlliance();
-    if (ally == DriverStation.Alliance.Red) {
-      switch (AutoConstants.autoNum){
-        case 1:
-          return AutoCommands.leftRed();
-        case 2:
-          return AutoCommands.midRed();
-        case 3:
-          return AutoCommands.rightRed();
-      }
-    }
-    else if (ally == DriverStation.Alliance.Blue) {
-      switch (AutoConstants.autoNum){
-        case 1:
-          return AutoCommands.leftBlue();
-        case 2:
-          return AutoCommands.midBlue();
-        case 3:
-          return AutoCommands.rightBlue();
-      }
-    }
-    else {
-        return null;
-    }
-    return null;
+    return Auto.getAutonomousCommand();
   }
 
   public void periodic() { //FOR CHOREO 1/18/24
