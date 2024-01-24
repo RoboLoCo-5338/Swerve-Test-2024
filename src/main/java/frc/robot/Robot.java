@@ -13,6 +13,7 @@ import frc.robot.commands.EffectorCommands;
 import frc.robot.commands.HookCommands;
 
 import frc.robot.commands.ShooterCommands;
+import frc.robot.subsystems.Auto;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -24,7 +25,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private SendableChooser<Integer> m_chooser = new SendableChooser<>();
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -33,11 +33,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    Auto.autoChooser();
     m_robotContainer = new RobotContainer();
-    m_chooser.setDefaultOption("Left", 1);
-    m_chooser.addOption("Middle", 2);
-    m_chooser.addOption("Right", 3);
-    SmartDashboard.putData("Auto Choices", m_chooser);
   }
 
   /**
@@ -67,7 +64,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    Constants.AutoConstants.autoNum=m_chooser.getSelected();
+    Auto.autoSelect();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     /*

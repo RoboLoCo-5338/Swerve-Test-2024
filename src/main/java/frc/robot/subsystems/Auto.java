@@ -3,7 +3,20 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Auto {
+    private static int autoNum;
+    private static SendableChooser<Integer> m_chooser = new SendableChooser<>();
+    public static void autoChooser(){
+        m_chooser.setDefaultOption("Left", 1);
+        m_chooser.addOption("Middle", 2);
+        m_chooser.addOption("Right", 3);
+        SmartDashboard.putData("Auto Choices", m_chooser);
+    }
+    public static void autoSelect(){
+        autoNum=m_chooser.getSelected();
+    }
     public static Command getAutonomousCommand() {
         // // Create config for trajectory
         // TrajectoryConfig config = new TrajectoryConfig(
@@ -81,7 +94,7 @@ public class Auto {
       // );
       DriverStation.Alliance ally = DriverStation.getAlliance();
         if (ally == DriverStation.Alliance.Red) {
-          switch (AutoConstants.autoNum){
+          switch (autoNum){
             case 1:
               return AutoCommands.leftRed();
             case 2:
@@ -91,7 +104,7 @@ public class Auto {
           }
         }
         else if (ally == DriverStation.Alliance.Blue) {
-          switch (AutoConstants.autoNum){
+          switch (autoNum){
             case 1:
               return AutoCommands.leftBlue();
             case 2:
