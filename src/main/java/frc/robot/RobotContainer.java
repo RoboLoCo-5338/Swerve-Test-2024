@@ -21,10 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d; //1/18/24
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.EffectorCommands;
-import frc.robot.commands.HookCommands;
-import frc.robot.commands.IntakeCommands;
-import frc.robot.commands.ShooterCommands;
+// import frc.robot.commands.EffectorCommands;
+// import frc.robot.commands.HookCommands;
+// import frc.robot.commands.IntakeCommands;
+// import frc.robot.commands.ShooterCommands;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Effector;
 import frc.robot.subsystems.Shooter;
@@ -51,11 +51,11 @@ import edu.wpi.first.wpilibj2.command.Commands;
  */
 public class RobotContainer {
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  public static final Shooter m_shooter = new Shooter();
-  public static final Hook m_hook = new Hook();
-  public static final Intake intake = new Intake();
-  public static final Effector m_effector = new Effector();
+  public final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  // public static final Shooter m_shooter = new Shooter();
+  // public static final Hook m_hook = new Hook();
+  // public static final Intake intake = new Intake();
+  // public static final Effector m_effector = new Effector();
 
 
   // The driver's controller
@@ -67,14 +67,14 @@ private static Joystick controller2 = new Joystick(OIConstants.kOperatorControll
 ChoreoTrajectory traj; //1/18/24
 Field2d m_field = new Field2d();
 
-  /**
+  /** 
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
-    traj = Choreo.getTrajectory("Trajectory"); //1/18/24
+    traj = Choreo.getTrajectory("1Meter"); //1/18/24
 
     m_field.getObject("traj").setPoses(
       traj.getInitialPose(), traj.getFinalPose()
@@ -82,6 +82,7 @@ Field2d m_field = new Field2d();
     m_field.getObject("trajPoses").setPoses(
       traj.getPoses()
     );
+    
     // SmartDashboard.putData(m_field);
 
     // Configure default commands
@@ -108,44 +109,44 @@ Field2d m_field = new Field2d();
    */
   private void configureButtonBindings() {
 
-    Trigger shooterForward = new Trigger(() -> controller2.getRawAxis(3) > 0.4);
-    shooterForward.whileTrue(ShooterCommands.shooterForward());
-    shooterForward.onFalse(ShooterCommands.shooterStop());
+//     Trigger shooterForward = new Trigger(() -> controller2.getRawAxis(3) > 0.4);
+//     shooterForward.whileTrue(ShooterCommands.shooterForward());
+//     shooterForward.onFalse(ShooterCommands.shooterStop());
 
     
-    Trigger shooterReverse = new Trigger(() -> controller2.getRawAxis(2) > 0.4);
-    shooterReverse.whileTrue(ShooterCommands.shooterReverse());
-    shooterReverse.onFalse(ShooterCommands.shooterStop());
+//     Trigger shooterReverse = new Trigger(() -> controller2.getRawAxis(2) > 0.4);
+//     shooterReverse.whileTrue(ShooterCommands.shooterReverse());
+//     shooterReverse.onFalse(ShooterCommands.shooterStop());
  
     
-    JoystickButton effectorForward = new JoystickButton(controller2, Constants.RBBUTTON);
-    effectorForward.whileTrue(EffectorCommands.effectorForward());
-    effectorForward.onFalse(EffectorCommands.effectorStop());
+//     JoystickButton effectorForward = new JoystickButton(controller2, Constants.RBBUTTON);
+//     effectorForward.whileTrue(EffectorCommands.effectorForward());
+//     effectorForward.onFalse(EffectorCommands.effectorStop());
 
     
-    JoystickButton effectorReverse = new JoystickButton(controller2, Constants.LBBUTTON);
-    effectorReverse.whileTrue(EffectorCommands.effectorReverse());
-    effectorReverse.onFalse(EffectorCommands.effectorStop());
+//     JoystickButton effectorReverse = new JoystickButton(controller2, Constants.LBBUTTON);
+//     effectorReverse.whileTrue(EffectorCommands.effectorReverse());
+//     effectorReverse.onFalse(EffectorCommands.effectorStop());
     
 
       
-JoystickButton hookUp = new JoystickButton(controller2, Constants.BBUTTON);
-hookUp.whileTrue(HookCommands.moveUp());
-hookUp.onFalse(HookCommands.stopHook());
+// JoystickButton hookUp = new JoystickButton(controller2, Constants.BBUTTON);
+// hookUp.whileTrue(HookCommands.moveUp());
+// hookUp.onFalse(HookCommands.stopHook());
 
 
-JoystickButton hookDown = new JoystickButton(controller2, Constants.XBUTTON);
-hookDown.whileTrue(HookCommands.moveDown());
-hookDown.onFalse(HookCommands.stopHook());
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Trigger intakeUp = new Trigger(() -> controller2.getRawAxis(1) > 0.4);
-intakeUp.whileTrue(IntakeCommands.intake(0.3));
-intakeUp.onFalse(IntakeCommands.stopIntake());
+// JoystickButton hookDown = new JoystickButton(controller2, Constants.XBUTTON);
+// hookDown.whileTrue(HookCommands.moveDown());
+// hookDown.onFalse(HookCommands.stopHook());
+// //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Trigger intakeUp = new Trigger(() -> controller2.getRawAxis(1) > 0.4);
+// intakeUp.whileTrue(IntakeCommands.intake(0.3));
+// intakeUp.onFalse(IntakeCommands.stopIntake());
 
 
-Trigger intakeDown = new Trigger(() -> controller2.getRawAxis(1) < -0.4);
-intakeDown.whileTrue(IntakeCommands.intake(-0.3));
-intakeDown.onFalse(IntakeCommands.stopIntake());
+// Trigger intakeDown = new Trigger(() -> controller2.getRawAxis(1) < -0.4);
+// intakeDown.whileTrue(IntakeCommands.intake(-0.3));
+// intakeDown.onFalse(IntakeCommands.stopIntake());
 
 
 
@@ -177,7 +178,7 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // // Create config for trajectory
+ // Create config for trajectory
     // TrajectoryConfig config = new TrajectoryConfig(
     //     AutoConstants.kMaxSpeedMetersPerSecond,
     //     AutoConstants.kMaxAccelerationMetersPerSecondSquared)
@@ -188,8 +189,8 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
     // Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
     //     // Start at the origin facing the +X direction
     //     new Pose2d(0, 0, new Rotation2d(0)),
-    //     // Pass through these two interior waypoints, making an 's' curve path
-    //     List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+        
+    //     List.of(new Translation2d(1, -1),new Translation2d(2, 1)),
     //     // End 3 meters straight ahead of where we started, facing forward
     //     new Pose2d(3, 0, new Rotation2d(0)),
     //     config);
@@ -210,13 +211,15 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
     //     m_robotDrive::setModuleStates,
     //     m_robotDrive);
 
-    // // Reset odometry to the starting pose of the trajectory.
+    // // // Reset odometry to the starting pose of the trajectory.
     // m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
-    // Run path following command, then stop at the end.
-    // return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true, false));
+    // // Run path following command, then stop at the end.
+    //  return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, true, false));
 
     //1/18/24 ---- CHOREO TESTING
+
+   
 
     var thetaController = new PIDController(AutoConstants.kPThetaController, 0, 0);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
@@ -239,7 +242,7 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
             speeds.vxMetersPerSecond,
             speeds.vyMetersPerSecond,
             speeds.omegaRadiansPerSecond,
-            false, true),
+            true, true),
         () -> {
             return false;
           }, // Whether or not to mirror the path based on alliance (CAN ADD LOGIC TO DO THIS AUTOMATICALLY)
@@ -249,7 +252,7 @@ intakeDown.onFalse(IntakeCommands.stopIntake());
     return Commands.sequence(
       Commands.runOnce(() -> m_robotDrive.resetOdometry(traj.getInitialPose())),
       swerveCommand,
-      m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, false, true))
+      m_robotDrive.run(() -> m_robotDrive.drive(0, 0, 0, true, true))
   );
   // DriverStation.Alliance ally = DriverStation.getAlliance();
   //   if (ally == DriverStation.Alliance.Red) {
